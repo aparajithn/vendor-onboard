@@ -1,36 +1,114 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# VendorOnboard
+
+A self-service vendor onboarding portal for small businesses. Simplify vendor document collection with automated invites, self-service uploads, and a centralized admin dashboard.
+
+## Features
+
+- **Self-Service Portal** — Vendors upload their own documents (W-9, COI, banking details, business license)
+- **Admin Dashboard** — Track vendor onboarding status in one place
+- **Email Invites** — Send unique invite links to vendors
+- **Document Management** — Secure storage with Supabase
+- **Status Tracking** — Monitor vendors from invited → approved
+
+## Tech Stack
+
+- **Frontend:** Next.js 15 (App Router) + TypeScript + Tailwind CSS
+- **Backend:** Supabase (Postgres + Auth + Storage)
+- **Email:** Resend (transactional emails)
+- **Hosting:** Vercel
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
+- Node.js 18+
+- Supabase account
+- Vercel account (for deployment)
+- Resend API key (for emails)
+
+### Local Development
+
+1. Clone the repository:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/aparajithn/vendor-onboard.git
+cd vendor-onboard
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies:
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Set up environment variables:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Create a `.env.local` file:
+```env
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key
+SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
+RESEND_API_KEY=your_resend_api_key
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+```
 
-## Learn More
+4. Run the development server:
+```bash
+npm run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Database Setup
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The database schema is in `supabase-schema.sql`. Run it in your Supabase SQL editor to create the required tables and policies.
 
-## Deploy on Vercel
+## Usage
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### For Business Owners
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. **Sign up** at `/login`
+2. **Invite vendors** from the dashboard
+3. **Track progress** as vendors upload documents
+4. **Review and approve** completed vendor submissions
+
+### For Vendors
+
+1. **Receive invite email** with unique link
+2. **Upload required documents** (drag & drop)
+3. **Submit for review** once all documents are uploaded
+
+## Project Structure
+
+```
+vendor-onboard/
+├── app/
+│   ├── dashboard/         # Admin dashboard
+│   ├── onboard/          # Vendor onboarding pages
+│   ├── api/              # API routes
+│   └── login/            # Auth pages
+├── components/           # React components
+├── lib/                  # Utilities (Supabase client)
+├── types/                # TypeScript types
+└── supabase-schema.sql   # Database schema
+```
+
+## Deployment
+
+### Deploy to Vercel
+
+1. Push code to GitHub
+2. Import project in Vercel
+3. Set environment variables in Vercel dashboard
+4. Deploy
+
+## Roadmap
+
+- [ ] Email notifications via Resend
+- [ ] Document expiration tracking
+- [ ] Multi-business support
+- [ ] Custom required documents per vendor
+- [ ] Analytics dashboard
+- [ ] DocuSign integration
+
+## License
+
+MIT
