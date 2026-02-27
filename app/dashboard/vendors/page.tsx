@@ -1,4 +1,4 @@
-import { createSupabaseServerClient } from '@/lib/supabase';
+import { createSupabaseServerClient } from '@/lib/supabase-server';
 import { Vendor, Document } from '@/types/database';
 import StatusBadge from '@/components/StatusBadge';
 import Link from 'next/link';
